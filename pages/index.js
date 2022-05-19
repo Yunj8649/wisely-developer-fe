@@ -289,8 +289,14 @@ export default function Home( props ) {
 
 export async function getServerSideProps( context ) {
     const query = { page: 1, limit: 100 }
-    const response = await getTodos({ query });
-    const { data, pagination } = response;
+    let data = null;
+    try {
+        const response = await getTodos({ query });
+        const { data: resData } = response;
+        data = resData;
+    } catch(e) {
+        console.error('조회에 실패했습니다.')
+    }
   
     return {
         props: {

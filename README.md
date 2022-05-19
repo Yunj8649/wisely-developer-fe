@@ -7,6 +7,7 @@ $ npm install
 $ npm run dev
 ```
 
-FE 시작 후 http://localhost:3000번으로 접속
-BE 시작 후 해당 페이지에서 동작 실행
+1. BE 시작 후
+2. FE 시작 
+3. http://localhost:3000번으로 접속
 

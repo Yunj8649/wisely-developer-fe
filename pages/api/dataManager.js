@@ -56,7 +56,7 @@ export async function deleteTodo({ id }) {
 function errorMessage( error ) {
   let message = 'error';
 
-  if ( error.response.data.message ) {
+  if ( error.response && error.response.data.message ) {
     message = error.response.data.message;
   }
   return message
