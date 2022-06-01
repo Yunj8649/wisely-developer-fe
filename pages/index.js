@@ -5,7 +5,7 @@ import Head from 'next/head'
 import Image from 'next/image'
 import styles from '../styles/Home.module.css'
 import { Button, List, Checkbox, Typography, Divider, Input, Radio, DatePicker, message, Select, Tag } from 'antd';
-import { addTodo, getTodos, deleteTodo, patchTodo } from './api/dataManager';
+import { addTodo, getTodos, deleteTodo, patchTodo, postTodo } from './api/dataManager';
 
 const DEFAULT_LIMIT = 5;
 export default function Home( props ) {
@@ -44,11 +44,8 @@ export default function Home( props ) {
     }, [ addContents ]);
     
     const onClickCompleteCheck = useCallback( async ({ id, checked }) => {
-        const body = {
-            isCompleted: checked
-        }
         try {
-            await patchTodo({ id, body })
+            await patchTodo({ id, isCompleted: checked })
         } catch(e) {
             message.error('저장에 실패했습니다.')
         }
@@ -71,7 +68,7 @@ export default function Home( props ) {
             contents: editContentsValue,
             refIds: editRefIds
         }
-        await patchTodo({ id: editContentsId, body })
+        await postTodo({ id: editContentsId, body })
             
         setEditContentsId( null );
         setEditContentsValue( '' );

@@ -28,12 +28,25 @@ export async function getTodos({ query }) {
   }
 }
 
-export async function patchTodo({ id, body }) {
+export async function postTodo({ id, body }) {
+  try {
+      const response = await axios({
+        method: 'POST',
+        url: `${nestAPI}/todo/${ id }`,
+        data: body
+      });
+      return response.data;
+  } catch ( error ) {
+    message.error(errorMessage(error));
+  }
+}
+
+export async function patchTodo({ id, isCompleted }) {
   try {
       const response = await axios({
         method: 'PATCH',
         url: `${nestAPI}/todo/${ id }`,
-        data: body
+        params: { isCompleted }
       });
       return response.data;
   } catch ( error ) {
